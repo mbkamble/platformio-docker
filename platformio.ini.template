@@ -1,0 +1,51 @@
+; PlatformIO Project Configuration File
+;
+;   Build options: build flags, source filter
+;   Upload options: custom upload port, speed and extra flags
+;   Library options: dependencies, extra library storages
+;   Advanced options: extra scripting
+;
+; Please visit documentation for the other options and examples
+; http://docs.platformio.org/page/projectconf.html
+
+[platformio]
+env_default = stm32
+
+[common_env_data]
+build_flags =
+lib_deps_builtin =
+lib_deps_external =
+
+[env:uno]
+platform = atmelavr
+board = uno
+framework = arduino
+
+[env:waveshare_ble400]
+platform = nordicnrf51
+board = waveshare_ble400
+framework = arduino
+
+[env:bluepill_f103c8]
+platform = ststm32
+board = bluepill_f103c8
+framework = arduino
+
+[env:due]
+platform = atmelsam
+board = due
+framework = arduino
+
+; Build options
+build_flags = ${common_env_data.build_flags}
+
+; Library options
+lib_deps =
+    ${common_env_data.lib_deps_external}
+
+; Debug options
+debug_tool = 
+debug_server =
+
+; Unit Testing options
+test_ignore = test_desktop
