@@ -19,21 +19,29 @@ USER build
 WORKDIR /home/build/
 COPY platformio.ini.template /home/build/platformio.ini.template
 
-# Predownload Uno, Due, BluePill(STM32F103C8), nRF5 (waveshareBLE400)  framework
+# Predownload Uno, Due, blackpill(genericSTM32F103C8), nRF5 (waveshareBLE400)  framework
 RUN mkdir /home/build/temp/ && \
     cd /home/build/temp/ && \
     pio update && \
-    pio init --board uno --board due --board waveshare_ble400 --board bluepill_f103c8 && \
+    pio init --board uno --board due --board waveshare_ble400 --board genericSTM32F103C8 && \
     rm /home/build/temp/platformio.ini && \
     cp /home/build/platformio.ini.template /home/build/temp/platformio.ini && \
     echo "void setup(){} void loop(){}" > /home/build/temp/src/main.ino && \
-    pio run && \
+    (pio run -e uno -t upload || pio run -e due -t upload || pio run -e blackpill -t upload || pio run -e waveshare_ble400 -t upload || true) && \
     cd /home/build/ && \
     rm -fr /home/build/temp/
 
 # Create builds directory as a volume
-RUN mkdir /home/build/builds
-RUN chown -R build:build /home/build/builds
+RUN mkdir /home/build/builds \
+    && chown -R build:build /home/build/builds
+
+# tool-stm32duino is specified as version 1.0.0 in ~/.platformio/platforms/ststm32/platform.json and accordingly
+# it downloads and installs https://dl.bintray.com/platformio/dl-packages/tool-stm32duino-linux_x86_64-1.0.0.tar.gz
+# This stm32duino-1.0.0.tgz has binaries of upload-reset and dfu-util that do not run. Hence we overwrite them
+# with freshly compiled version from the latest release of Arduino_STM32
+COPY upload-reset /home/build/.platformio/packages/tool-stm32duino/
+COPY dfu-util /home/build/.platformio/packages/tool-stm32duino/dfu-util/
+
 VOLUME ["/home/build/builds"]
 
 # Final setup

@@ -9,32 +9,45 @@
 ; http://docs.platformio.org/page/projectconf.html
 
 [platformio]
-env_default = stm32
+env_default = uno, due, blackpill
 
 [common_env_data]
 build_flags =
 lib_deps_builtin =
 lib_deps_external =
+upload_port = ttyACM0
 
 [env:uno]
 platform = atmelavr
 board = uno
 framework = arduino
+upload_port = ${common_env_data.upload_port}
 
 [env:waveshare_ble400]
 platform = nordicnrf51
 board = waveshare_ble400
 framework = arduino
+upload_port = ${common_env_data.upload_port}
 
-[env:bluepill_f103c8]
+[env:blackpill]
 platform = ststm32
-board = bluepill_f103c8
+board = genericSTM32F103C8
 framework = arduino
+upload_protocol = dfu
+upload_port = ${common_env_data.upload_port}
+
+[env:blackpill-dev]
+platform = https://github.com/platformio/platform-ststm32.git
+board = genericSTM32F103C8
+framework = arduino
+upload_protocol = dfu
+upload_port = ${common_env_data.upload_port}
 
 [env:due]
 platform = atmelsam
 board = due
 framework = arduino
+upload_port = ${common_env_data.upload_port}
 
 ; Build options
 build_flags = ${common_env_data.build_flags}
