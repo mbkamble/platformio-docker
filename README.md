@@ -2,13 +2,13 @@
 Build system for Arduino, STM32 and nRF5 IOT devices.
 Specifically, I use the Uno (R3), Due, Blackpill (generic STM32F103C8T6) and YJ14015-NRF51822 boards.
 
-![Uno (R3)](board-pics/arduino_uno.jpg)
+<img src="board-pics/arduino_uno.jpg" width="200">
 
-![Due (R3)](board-pics/arduino_due.jpg)
+<img src="board-pics/arduino_due.jpg" width="200">
 
-![STM32F103C8T6](board-pics/STM32F103C8T6.jpg)
+<img src="board-pics/STM32F103C8T6.jpg" width="200">
 
-![YJ14015](board-pics/YJ14015.jpg)
+<img src="board-pics/YJ14015.jpg" width="200">
 
 This container contains the [platformio](https://platformio.org) a cross platform code builder and library manager with extensive support for IoT boards
 
