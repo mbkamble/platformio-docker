@@ -2,7 +2,7 @@
 Build system for Arduino, STM32 and nRF5 IOT devices.
 Specifically, I use the Uno (R3), Due, Blackpill (generic STM32F103C8T6) and YJ14015-NRF51822 boards.
 
-<img src="board-pics/arduino_uno.jpg" width="200">
+<img src="board-pics/arduino_uno.jpeg" width="200">
 
 <img src="board-pics/arduino_due.jpg" width="200">
 
